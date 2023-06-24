@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,11 +20,13 @@ public class AddOperation  extends HttpServlet{
 	public void add(HttpServletRequest req,HttpServletResponse res) throws IOException
 	{
 		Double a,b;
-		HttpSession session = req.getSession();
+		
 		a = Double.parseDouble(req.getParameter("value1"));
 		b = Double.parseDouble(req.getParameter("value2"));
 		double c = a + b;
-		session.setAttribute("c", c);
+		Cookie cookie = new Cookie("c",c+"");
+		res.addCookie(cookie);
+		
 		
 	}
 	public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException

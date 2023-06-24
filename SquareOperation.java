@@ -3,6 +3,7 @@ package firstwebdemo;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,11 +13,18 @@ public class SquareOperation extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException
 	{
-		
-		HttpSession session = req.getSession();
-		double value =(double)session.getAttribute("c");
+		double value = 0;
+		Cookie cookies[] = req.getCookies();
 		PrintWriter out = res.getWriter();
-		out.print("sqaured values is:"+ (Math.pow(value, 2)));
+		for(Cookie cookie : cookies)
+		{
+			if(cookie.getName().equals("c"))
+			{
+				value = Double.parseDouble(cookie.getValue());
+			}
+		}
+		out.print("sqaure value is :" + (Math.pow(value, 2)));
+	
 		
 	}
 }
