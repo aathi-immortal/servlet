@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class AddOperation  extends HttpServlet{
 //	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException
@@ -18,12 +19,11 @@ public class AddOperation  extends HttpServlet{
 	public void add(HttpServletRequest req,HttpServletResponse res) throws IOException
 	{
 		Double a,b;
+		HttpSession session = req.getSession();
 		a = Double.parseDouble(req.getParameter("value1"));
 		b = Double.parseDouble(req.getParameter("value2"));
 		double c = a + b;
-		PrintWriter out = res.getWriter();
-		out.print("value is :" + c);
-		res.sendRedirect("square?c="+c); //url writing
+		session.setAttribute("c", c);
 		
 	}
 	public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException
@@ -31,7 +31,7 @@ public class AddOperation  extends HttpServlet{
 		
 		
 		add(req,res);
-		
+		res.sendRedirect("square");
 //		RequestDispatcher red = req.getRequestDispatcher("square");
 //		red.forward(req, res);
 	}
