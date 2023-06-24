@@ -21,16 +21,19 @@ public class AddOperation  extends HttpServlet{
 		a = Double.parseDouble(req.getParameter("value1"));
 		b = Double.parseDouble(req.getParameter("value2"));
 		double c = a + b;
-		req.setAttribute("c", c);
 		PrintWriter out = res.getWriter();
 		out.print("value is :" + c);
+		res.sendRedirect("square?c="+c); //url writing
+		
 	}
 	public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException
 	{
 		
+		
 		add(req,res);
-		RequestDispatcher red = req.getRequestDispatcher("square");
-		red.forward(req, res);
+		
+//		RequestDispatcher red = req.getRequestDispatcher("square");
+//		red.forward(req, res);
 	}
 	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException
 	{

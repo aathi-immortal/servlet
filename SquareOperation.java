@@ -9,12 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class SquareOperation extends HttpServlet{
 	
-	public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException
+	public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException
 	{
 		
-		double value =(double)req.getAttribute("c");
+		double value =Double.parseDouble(req.getParameter("c"));
 		PrintWriter out = res.getWriter();
-		out.print("sqaure value : " + Math.pow(value, 2));
+		out.print("sqaured values is:"+ (Math.pow(value, 2)));
 		
 	}
 }
